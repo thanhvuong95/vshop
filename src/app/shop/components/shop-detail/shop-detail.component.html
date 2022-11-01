@@ -154,14 +154,11 @@
       <!-- end product relative -->
     </div>
     <div *ngIf="error">
-      <div class="h-screen flex justify-center items-center">
-        <div class="text-center">
-          <img class="w-1/2 mx-auto mb-4" src="assets/svg/404.svg" />
-          <p class="text-xl font-medium">Product not found</p>
-          <p class="py-3">Make sure entered correct product id in url.</p>
-          <a routerLink="/shop" nz-button>Back to shop</a>
-        </div>
-      </div>
+      <app-error>
+        <p class="text-xl font-medium">Product not found</p>
+        <p class="py-3">Make sure entered correct product id in url.</p>
+        <a routerLink="/shop" nz-button>Back to shop</a>
+      </app-error>
     </div>
   </div>
 </div>
