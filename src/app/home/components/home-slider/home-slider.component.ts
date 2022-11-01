@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import SwiperCore, { Autoplay, Navigation } from 'swiper';
+
 import { ISliderData } from 'src/app/core/models';
 import { SliderData } from '../../constants';
-
-import SwiperCore, { Autoplay, Navigation } from 'swiper';
 
 SwiperCore.use([Autoplay, Navigation]);
 
@@ -10,7 +10,6 @@ SwiperCore.use([Autoplay, Navigation]);
   selector: 'app-home-slider',
   templateUrl: './home-slider.component.html',
   styleUrls: ['./home-slider.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class HomeSliderComponent implements OnInit {
   sliderData: ISliderData[] = SliderData;

@@ -14,6 +14,8 @@ export class ShopContentComponent implements OnInit {
   isLoadMore = false;
   isLoading = false;
 
+  error: string | null = null;
+
   page = 1;
   totalPage = 0;
   products: IProduct[] = [];
@@ -39,11 +41,16 @@ export class ShopContentComponent implements OnInit {
         ),
         finalize(() => (this.isLoading = false))
       )
-      .subscribe((result) => {
-        const { totalPage, data } = result;
-        this.isLoading = false;
-        this.totalPage = totalPage;
-        this.products = data;
+      .subscribe({
+        next: (result) => {
+          const { totalPage, data } = result;
+          this.isLoading = false;
+          this.totalPage = totalPage;
+          this.products = data;
+        },
+        error: (err) => {
+          this.error = err;
+        },
       });
     this.subscription.push(subs);
   }
