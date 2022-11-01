@@ -24,6 +24,7 @@ import {
   HeaderComponent,
   ProductCardComponent,
   SkeletonComponent,
+  ErrorComponent,
 } from './components';
 
 const SharedModules = [
@@ -51,10 +52,11 @@ const SharedComponents = [
   FooterComponent,
   ProductCardComponent,
   SkeletonComponent,
+  ErrorComponent,
 ];
 
 @NgModule({
-  declarations: [...SharedComponents],
+  declarations: [...SharedComponents, ErrorComponent],
   imports: [...SharedModules],
   exports: [...SharedModules, ...SharedComponents],
 })
