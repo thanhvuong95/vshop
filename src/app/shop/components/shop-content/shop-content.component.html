@@ -1,21 +1,25 @@
 <div class="py-16">
-  <div
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-    infiniteScroll
-    [infiniteScrollDistance]="1"
-    [infiniteScrollThrottle]="150"
-    (scrolled)="loadMoreProduct()"
-  >
-    <ng-container *ngIf="isLoading">
+  <div *ngIf="!error; else errorTmp">
+    <div
+      *ngIf="isLoading"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+    >
       <app-skeleton *ngFor="let item of skeleton"></app-skeleton>
-    </ng-container>
-    <ng-container *ngIf="!isLoading">
+    </div>
+    <div
+      *ngIf="!isLoading && products.length; else nodata"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+      infiniteScroll
+      [infiniteScrollDistance]="1"
+      [infiniteScrollThrottle]="150"
+      (scrolled)="loadMoreProduct()"
+    >
       <app-product-card
         *ngFor="let product of products"
         [product]="product"
         [routerLink]="['/shop', product.id]"
       ></app-product-card>
-    </ng-container>
+    </div>
   </div>
   <nz-spin
     class="text-center py-4"
@@ -24,3 +28,15 @@
     nzSize="large"
   ></nz-spin>
 </div>
+
+<ng-template #errorTmp>
+  <app-error>
+    <span class="mt-5">Oops! {{ error }}.</span>
+  </app-error>
+</ng-template>
+
+<ng-template #nodata>
+  <div class="h-full flex justify-center items-center">
+    <nz-empty nzNotFoundContent="No data result."></nz-empty>
+  </div>
+</ng-template>

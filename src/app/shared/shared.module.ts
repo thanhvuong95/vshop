@@ -18,6 +18,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
 
 import {
   FooterComponent,
@@ -46,6 +47,7 @@ const SharedModules = [
   NzInputModule,
   NzBreadCrumbModule,
   NzDividerModule,
+  NzEmptyModule
 ];
 const SharedComponents = [
   HeaderComponent,

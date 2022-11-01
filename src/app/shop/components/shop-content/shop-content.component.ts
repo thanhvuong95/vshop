@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize, Subscription, switchMap, tap } from 'rxjs';
@@ -48,8 +49,8 @@ export class ShopContentComponent implements OnInit {
           this.totalPage = totalPage;
           this.products = data;
         },
-        error: (err) => {
-          this.error = err;
+        error: (err: HttpErrorResponse) => {
+          this.error = err.message;
         },
       });
     this.subscription.push(subs);
@@ -65,10 +66,15 @@ export class ShopContentComponent implements OnInit {
       this.isLoadMore = true;
       const subs = this._productService
         .getProducts(++this.page, queryParams)
-        .subscribe((res) => {
-          const { data } = res;
-          this.isLoadMore = false;
-          this.products = data;
+        .subscribe({
+          next: (res) => {
+            const { data } = res;
+            this.isLoadMore = false;
+            this.products = data;
+          },
+          error: (err: HttpErrorResponse) => {
+            this.error = err.message;
+          },
         });
       this.subscription.push(subs);
     }

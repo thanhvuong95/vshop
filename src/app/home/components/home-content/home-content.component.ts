@@ -1,7 +1,8 @@
-import { ProductService } from '../../../core/services/product.service';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+
 import { IProduct } from 'src/app/core/models';
-import { filter, map, Observable } from 'rxjs';
+import { ProductService } from '../../../core/services/product.service';
 
 @Component({
   selector: 'app-home-content',
