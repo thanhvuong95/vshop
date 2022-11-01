@@ -28,14 +28,14 @@ export class ProductService {
       map((products) => {
         const limit = 7;
         const { q, sort } = query;
-        // fake call api pagination
-        const totalPage = Math.ceil(products.length / limit);
+
         //fake search
         const searchData = this.searchByName(products, q);
         // const searchData =
         //fake sort & filter
         const result = this.queryProducts(searchData, sort);
         // fake call api pagination
+        const totalPage = Math.ceil(result.length / limit);
         const data = result.slice(0, page * limit);
 
         return {
