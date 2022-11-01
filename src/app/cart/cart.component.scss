@@ -1,0 +1,11 @@
+.text-truncate {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  -webkit-line-clamp: 2;
+}
+.hidden-scrollbar::-webkit-scrollbar {
+  display: none;
+}

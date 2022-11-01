@@ -1,0 +1,88 @@
+<div
+  class="flex flex-col w-full max-w-[350px] h-full fixed top-0 right-0 z-[99] bg-white transition-transform duration-200 ease-linear"
+  [class]="openCart ? 'translate-x-0' : 'translate-x-full'"
+>
+  <h2 class="text-xl font-medium p-5 border-b border-[#d8d3cf]">
+    Shopping Cart
+  </h2>
+  <div class="hidden-scrollbar flex-1 py-5 overflow-y-auto">
+    <div
+      *ngIf="!carts.length"
+      class="h-full flex flex-col gap-2 justify-center items-center"
+    >
+      <img nz-image nzDisablePreview nzSrc="assets/images/cart.png" />
+      <span>Oops! your cart is empty.</span>
+    </div>
+    <div *ngIf="carts.length" class="flex flex-col">
+      <div
+        *ngFor="let cart of carts"
+        class="flex gap-2 p-3 cursor-pointer transition-all hover:bg-backgroundGrey"
+      >
+        <nz-badge
+          [nzCount]="cart.quantity"
+          nzShowZero
+          [nzOffset]="[-60, 10]"
+          [nzStyle]="{ backgroundColor: '#2e6bc6' }"
+        >
+          <img
+            class="w-20 h-20 object-contain"
+            [src]="cart.imageUrls[0]"
+            alt="image"
+          />
+        </nz-badge>
+        <div class="flex-1">
+          <div class="flex gap-2 items-center">
+            <span class="text-truncate">{{ cart.name }}</span>
+
+            <i
+              class="text-[#ff0000] text-sm rounded-full cursor-pointer"
+              nz-tooltip="Delete"
+              nz-icon
+              nzType="delete"
+              nzTheme="outline"
+              (click)="deleteCartItem(cart.id)"
+            ></i>
+          </div>
+          <div class="flex justify-between items-center mt-2">
+            <span class="text-primary">
+              {{
+                cart.price - (cart.price * cart.discountPercent) / 100
+                  | currency
+              }}</span
+            >
+            <div class="flex gap-2">
+              <button
+                nz-button
+                nzSize="small"
+                [disabled]="cart.quantity < 2"
+                (click)="decreaseQty(cart.id)"
+              >
+                -
+              </button>
+              <button nz-button nzSize="small" (click)="increaseQty(cart.id)">
+                +
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-5 border-t border-[#d8d3cf]">
+    <p class="font-medium mb-3">Total price: {{ totalPrice | currency }}</p>
+    <button
+      class="block w-full uppercase bg-backgroundPrimary hover:bg-backgroundDarkPrimary"
+      nz-button
+      nzSize="large"
+      nzType="primary"
+      [disabled]="!carts.length"
+    >
+      Check out
+    </button>
+  </div>
+</div>
+<div
+  class="fixed top-0 right-0 z-[98] left-0 bottom-0 bg-[#00000073] cursor-pointer"
+  [class]="openCart ? 'block' : 'hidden'"
+  (click)="closeCart.emit()"
+></div>

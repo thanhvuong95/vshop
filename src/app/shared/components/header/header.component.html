@@ -1,0 +1,88 @@
+<header class="h-20 fixed top-0 left-0 w-full bg-white shadow-sm z-20">
+  <div class="app-container flex justify-between items-center p-5">
+    <!-- start menu icon mobile -->
+    <div class="lg:hidden cursor-pointer" (click)="toggleNavigation()">
+      <i class="text-2xl" nz-icon nzType="menu" nzTheme="outline"></i>
+    </div>
+    <!-- end menu icon mobile -->
+
+    <!-- start nav mobile -->
+    <div
+      class="w-full max-w-sm fixed top-0 left-0 bottom-0 z-50 bg-white shadow-md -translate-x-full transition-all ease-linear duration-300"
+      [class]="isOpen ? 'translate-x-0' : ''"
+    >
+      <div class="relative flex flex-col py-20">
+        <div class="absolute top-10 right-10" (click)="toggleNavigation()">
+          <i
+            class="text-xl cursor-pointer hover:text-primary transition-all"
+            nz-icon
+            nzType="close"
+            nzTheme="outline"
+          ></i>
+        </div>
+        <a
+          class="block w-full text-center py-5 hover:bg-backgroundGrey uppercase transition-all"
+          *ngFor="let navItem of navList"
+          (click)="toggleNavigation()"
+          [routerLink]="navItem.path"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >{{ navItem.title }}</a
+        >
+        <div class="text-center py-5">
+          <button class="uppercase hover:text-primary" nz-button nzSize="large">
+            Sign in
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- end nav mobile -->
+
+    <!-- start nav left -->
+    <div class="flex items-center gap-20">
+      <img class="cursor-pointer" src="assets/svg/logo.svg" routerLink="" />
+      <div class="hidden lg:flex gap-8">
+        <a
+          class="uppercase"
+          *ngFor="let navItem of navList"
+          [routerLink]="navItem.path"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >{{ navItem.title }}</a
+        >
+      </div>
+    </div>
+    <!-- end nav left -->
+
+    <!-- start nav right -->
+    <div class="flex item-center gap-8">
+      <div class="relative" (click)="showCart.emit()">
+        <span
+          class="absolute -top-4 -right-4 flex justify-center items-center w-[30px] h-[30px] rounded-full bg-backgroundPrimary text-white border border-white cursor-pointer"
+          [class]="activeAnimated ? 'animate-shaking' : ''"
+          >{{ quantity }}</span
+        >
+        <i
+          class="cursor-pointer"
+          [style.fontSize.px]="24"
+          nz-icon
+          nzType="shopping"
+          nzTheme="outline"
+        ></i>
+      </div>
+      <button
+        class="hidden lg:inline-block uppercase hover:text-primary"
+        nz-button
+      >
+        Sign in
+      </button>
+    </div>
+    <!-- end nav right -->
+  </div>
+  <!-- Overlay -->
+  <div
+    [class]="isOpen ? 'block bg-opacity-100' : 'hidden'"
+    class="fixed top-0 left-0 right-0 bottom-0 z-40 bg-[#00000073] bg-opacity-0 transition-all duration-300 ease-linear cursor-pointer"
+    (click)="toggleNavigation()"
+  ></div>
+</header>

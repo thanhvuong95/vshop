@@ -1,0 +1,41 @@
+<form
+  class="shop-filter flex justify-between items-center"
+  [formGroup]="queryForm"
+>
+  <nz-input-group
+    [nzPrefix]="prefixIconSearch"
+    nzSize="large"
+    class="w-full md:max-w-sm"
+  >
+    <input
+      type="text"
+      nz-input
+      placeholder="Search products..."
+      formControlName="q"
+    />
+  </nz-input-group>
+  <nz-select
+    formControlName="sort"
+    nzAllowClear
+    nzPlaceHolder="Filter & sort"
+    nzSize="large"
+    class="w-48 hidden md:block"
+  >
+    <nz-option-group *ngFor="let item of filterList" [nzLabel]="item.label">
+      <nz-option
+        *ngFor="let option of item.options"
+        [nzLabel]="option.label"
+        [nzValue]="{ type: item.value, value: option.value }"
+        nzCustomContent
+      >
+        <nz-space nzSize="middle">
+          <i *nzSpaceItem [class]="'bx bx-' + option.icon"></i>
+          <span *nzSpaceItem>{{ option.label }}</span>
+        </nz-space>
+      </nz-option>
+    </nz-option-group>
+  </nz-select>
+</form>
+<ng-template #prefixIconSearch>
+  <span nz-icon nzType="search"></span>
+</ng-template>

@@ -1,0 +1,188 @@
+<div>
+  <div class="app-container p-5">
+    <div *ngIf="isLoading" class="h-screen flex justify-center items-center">
+      <nz-spin nzSimple nzSize="large"></nz-spin>
+    </div>
+    <div *ngIf="product">
+      <nz-breadcrumb class="uppercase mb-5">
+        <nz-breadcrumb-item *ngFor="let breadcrumb of breadcrumbs">
+          {{ breadcrumb || "Home" }}
+        </nz-breadcrumb-item>
+      </nz-breadcrumb>
+      <div class="lg:flex gap-8">
+        <!-- start product image -->
+        <div class="flex flex-col lg:flex-row-reverse gap-4">
+          <div
+            class="w-full lg:w-[400px] h-[400px] p-5 border-2 border-[#8c8c8c] rounded-sm"
+          >
+            <img
+              class="w-full h-full object-contain"
+              nz-image
+              [nzSrc]="product.imageUrls[activeImg]"
+              nzDisablePreview="true"
+            />
+          </div>
+          <div class="grid grid-cols-2 sm:flex lg:flex-col gap-2">
+            <div
+              class="sm:w-1/4 lg:w-full h-[100px] border border-[#e5e7eb] rounded-md p-2 cursor-pointer"
+              [class]="{ 'border-primary': activeImg === idx }"
+              *ngFor="let imgUrl of product.imageUrls; index as idx"
+              (click)="activeImg = idx"
+            >
+              <img
+                class="w-full h-full object-contain"
+                nz-image
+                [nzSrc]="imgUrl"
+                nzDisablePreview="true"
+              />
+            </div>
+          </div>
+        </div>
+        <!-- end product image -->
+        <!-- start product content -->
+        <div class="py-8 px-4">
+          <!-- start name & date section -->
+          <h3 class="text-lg font-medium">{{ product.name }}</h3>
+          <span class="text-grey font-medium">{{
+            product.timeStamp.seconds * 1000 +
+              product.timeStamp.nanoseconds / 1000000 | date: "mediumDate"
+          }}</span>
+          <!-- end name & date section -->
+          <!-- start price section -->
+          <div class="text-2xl text-darkPrimary mt-5">
+            {{
+              (product.discountPercent
+                ? product.price -
+                  (product.price * product.discountPercent) / 100
+                : product.price
+              ) | currency
+            }}
+            <sup>
+              <del
+                class="text-lightGrey text-sm"
+                *ngIf="product.discountPercent"
+              >
+                {{ product.price | currency }}
+              </del>
+            </sup>
+          </div>
+          <!-- end price section -->
+
+          <!-- start status section-->
+          <div>
+            <nz-divider></nz-divider>
+            <span class="text-lightGrey">Availability: </span>
+            <span class="inline-flex gap-1 items-center font-bold">
+              {{ product.inStock ? "in stock" : "out of stock" }}
+              <i
+                [class]="product.inStock ? 'text-[#45ab3d]' : 'text-[#e74c3c]'"
+                nz-icon
+                [nzType]="product.inStock ? 'check' : 'close'"
+                nzTheme="outline"
+              ></i>
+            </span>
+            <nz-divider></nz-divider>
+          </div>
+          <!--end status section-->
+
+          <!-- start buy section-->
+          <div
+            class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-5"
+          >
+            <div class="flex items-center gap-2">
+              <span>Quantity:</span>
+              <nz-input-group class="w-20" [nzSuffix]="suffixIcon">
+                <input
+                  #qtyRef
+                  nz-input
+                  [ngModel]="quantity"
+                  (ngModelChange)="onChange($event)"
+                  (blur)="onBlur()"
+                />
+              </nz-input-group>
+            </div>
+            <button
+              class="uppercase cursor-pointer text-white bg-backgroundPrimary hover:bg-backgroundDarkPrimary hover:text-white disabled:bg-backgroundLightPrimary disabled:text-white disabled:hover:bg-backgroundLightPrimary disabled:hover:text-white"
+              nz-button
+              nzSize="large"
+              [disabled]="!product.inStock"
+            >
+              Add to cart
+            </button>
+          </div>
+          <!-- end buy section-->
+          <!-- end note section-->
+          <p>
+            Note: Electronic products sold in US store operate on (110-120)
+            volts, a step-down power converter is required for the smooth device
+            function. It is mandatory to know the wattage of the device in order
+            to choose the appropriate power converter. Recommended power
+            converters
+          </p>
+          <!-- end note section-->
+        </div>
+        <!-- end product content -->
+      </div>
+      <!-- start product descriptions -->
+      <div>
+        <nz-divider></nz-divider>
+        <h3 class="text-xl font-medium">Description</h3>
+        <p>{{ product.description }}</p>
+        <ul class="px-5 list-disc">
+          <li class="py-1" *ngFor="let feature of product.features">
+            {{ feature }}
+          </li>
+        </ul>
+        <nz-divider></nz-divider>
+      </div>
+      <!-- end product descriptions -->
+      <!-- start product relative -->
+      <div>
+        <h3 class="text-xl font-medium">Relative Products</h3>
+        <swiper [navigation]="true">
+          <ng-template swiperSlide>
+            <div>Item1</div>
+          </ng-template>
+          <ng-template swiperSlide>
+            <div>Item1</div>
+          </ng-template>
+          <ng-template swiperSlide>
+            <div>Item1</div>
+          </ng-template>
+        </swiper>
+      </div>
+      <!-- end product relative -->
+    </div>
+    <div *ngIf="error">
+      <div class="h-screen flex justify-center items-center">
+        <div class="text-center">
+          <img class="w-1/2 mx-auto mb-4" src="assets/svg/404.svg" />
+          <p class="text-xl font-medium">Product not found</p>
+          <p class="py-3">Make sure entered correct product id in url.</p>
+          <a routerLink="/shop" nz-button>Back to shop</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #suffixIcon>
+  <div class="flex flex-col">
+    <i
+      class="cursor-pointer hover:text-primary"
+      nz-icon
+      nzType="caret-up"
+      nzTheme="outline"
+      [class]="+quantity < 1 ? 'pointer-events-none text-[#d8d3cf]' : ''"
+      (click)="increaseQty()"
+    ></i>
+    <i
+      class="cursor-pointer hover:text-primary"
+      [class]="+quantity < 2 ? 'pointer-events-none text-[#d8d3cf]' : ''"
+      nz-icon
+      nzType="caret-down"
+      nzTheme="outline"
+      (click)="decreaseQty()"
+    ></i>
+  </div>
+</ng-template>
