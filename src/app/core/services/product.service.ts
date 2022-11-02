@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
+import { ICategory } from './../models/category.model';
 
 import {
   IOption,
@@ -60,13 +61,23 @@ export class ProductService {
     return this._http.get<IProduct>(`${this.baseUrl}/product/${id}`);
   }
 
+  getRelativeProduct(id: string, category: ICategory) {
+    return this._http.get<IProduct[]>(`${this.baseUrl}/product`).pipe(
+      map((products) => {
+        return products.filter(
+          (product) => product.id !== id && product.category === category
+        );
+      })
+    );
+  }
+
   private queryProducts(products: IProduct[], query: IOption | null) {
     if (!query) return products;
-    const { type, value } = query;
 
+    const { type, value } = query;
     switch (type) {
       case IOptionType.CATEGORY:
-        return products.filter((product) => product.category === value);
+        return this.filterByCategory(products, value);
       case IOptionType.NAME:
         return this.sortByName(products, value);
       case IOptionType.PRICE:

@@ -39,8 +39,7 @@ export class ShopContentComponent implements OnInit {
         }),
         switchMap((queryParams) =>
           this._productService.getProducts(this.page, queryParams)
-        ),
-        finalize(() => (this.isLoading = false))
+        )
       )
       .subscribe({
         next: (result) => {
@@ -50,6 +49,7 @@ export class ShopContentComponent implements OnInit {
           this.products = data;
         },
         error: (err: HttpErrorResponse) => {
+          this.isLoading = false;
           this.error = err.message;
         },
       });
@@ -73,6 +73,7 @@ export class ShopContentComponent implements OnInit {
             this.products = data;
           },
           error: (err: HttpErrorResponse) => {
+            this.isLoadMore = false;
             this.error = err.message;
           },
         });
