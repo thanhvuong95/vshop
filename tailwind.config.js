@@ -15,10 +15,26 @@ module.exports = {
         backgroundDarkestGrey: "#353535",
         backgroundGrey: "#eee",
       },
-      maxWidth: {
-        productCard: "300px",
+      spacing: {
+        100: "100px",
+        250: "250px",
+        300: "300px",
+        350: "350px",
+        400: "400px",
         1200: "1200px",
       },
+      height: (theme) => ({
+        ...theme("spacing"),
+      }),
+      width: (theme) => ({
+        ...theme("spacing"),
+      }),
+      minWidth: (theme) => ({
+        ...theme("spacing"),
+      }),
+      maxWidth: (theme) => ({
+        ...theme("spacing"),
+      }),
       keyframes: {
         shaking: {
           "0%": {

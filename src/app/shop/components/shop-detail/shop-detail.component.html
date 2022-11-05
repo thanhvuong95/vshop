@@ -13,7 +13,7 @@
         <!-- start product image -->
         <div class="flex flex-col lg:flex-row-reverse gap-4">
           <div
-            class="w-full lg:w-[400px] h-[400px] p-5 border-2 border-[#8c8c8c] rounded-sm"
+            class="w-full lg:w-400 h-400 p-5 border-2 border-[#8c8c8c] rounded-sm"
           >
             <img
               class="w-full h-full object-contain"
@@ -24,7 +24,7 @@
           </div>
           <div class="grid grid-cols-2 sm:flex lg:flex-col gap-2">
             <div
-              class="sm:w-1/4 lg:w-full h-[100px] border border-[#e5e7eb] rounded-md p-2 cursor-pointer"
+              class="sm:w-1/4 lg:w-full h-100 min-w-100 border border-[#e5e7eb] rounded-md p-2 cursor-pointer"
               [class]="{ 'border-primary': activeImg === idx }"
               *ngFor="let imgUrl of product.imageUrls; index as idx"
               (click)="activeImg = idx"
