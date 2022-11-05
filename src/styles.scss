@@ -16,5 +16,20 @@
 }
 
 .app-container {
-  @apply max-w-1200 mx-auto
+  @apply max-w-1200 mx-auto;
 }
+body::-webkit-scrollbar {
+  width: 0.75rem;
+}
+
+body::-webkit-scrollbar-thumb {
+  @apply bg-backgroundLightPrimary rounded-full border border-white;
+}
+
+*::-webkit-scrollbar {
+  width: 0.5rem;
+}
+*::-webkit-scrollbar-thumb {
+  @apply bg-backgroundDarkestGrey rounded-full border border-white;
+}
+

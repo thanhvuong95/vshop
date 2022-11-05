@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { ICartItem, ICartAction } from './../core/models';
+import { ICartItem } from './../core/models';
 import { CartService } from './../core/services/cart.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class CartComponent implements OnInit {
   carts: ICartItem[] = [];
   totalPrice = 0;
 
-  constructor(private _cartService: CartService) {}
+  constructor(private _cartService: CartService, private _router: Router) {}
 
   ngOnInit(): void {
     this._cartService.carts.subscribe((carts) => {
@@ -28,15 +29,8 @@ export class CartComponent implements OnInit {
     });
   }
 
-  deleteCartItem(id: string) {
-    this._cartService.remove(id);
-  }
-
-  increaseQty(id: string) {
-    this._cartService.changeQty(id, ICartAction.INCREASE);
-  }
-
-  decreaseQty(id: string) {
-    this._cartService.changeQty(id, ICartAction.DECREASE);
+  navigate() {
+    this.closeCart.emit();
+    this._router.navigate(['/checkout']);
   }
 }
