@@ -1,0 +1,15 @@
+<div>
+  <div class="app-container p-5">
+    <nz-steps [nzCurrent]="step" (nzIndexChange)="step = $event">
+      <nz-step *ngFor="let title of steps" [nzTitle]="title"> </nz-step>
+    </nz-steps>
+    <div [ngSwitch]="step">
+      <div *ngSwitchCase="0" class="py-5">
+        <app-cart-step [carts]="carts"></app-cart-step>
+      </div>
+      <div *ngSwitchCase="1" class="py-5">
+        <app-verify-step [carts]="carts"></app-verify-step>
+      </div>
+    </div>
+  </div>
+</div>

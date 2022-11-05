@@ -1,0 +1,51 @@
+<div
+  class="flex gap-2 p-3 cursor-pointer transition-all hover:bg-backgroundGrey"
+  [routerLink]="['/shop', cartItem.id]"
+>
+  <nz-badge
+    [nzCount]="cartItem.quantity"
+    nzShowZero
+    [nzOffset]="[-60, 10]"
+    [nzStyle]="{ backgroundColor: '#2e6bc6' }"
+  >
+    <img
+      class="w-20 h-20 object-contain"
+      [src]="cartItem.imageUrls[0]"
+      alt="image"
+    />
+  </nz-badge>
+  <div class="flex-1">
+    <div class="flex gap-2 justify-between items-center">
+      <span class="text-truncate">{{ cartItem.name }}</span>
+
+      <i
+        class="text-[#ff0000] text-sm rounded-full cursor-pointer"
+        nz-tooltip="Delete"
+        nz-icon
+        nzType="delete"
+        nzTheme="outline"
+        (click)="deleteCartItem($event, cartItem.id)"
+      ></i>
+    </div>
+    <div class="flex justify-between items-center mt-2">
+      <span class="text-primary"> {{ priceDiscount | currency }}</span>
+      <div class="flex gap-2">
+        <button
+          nz-button
+          nzSize="small"
+          [disabled]="cartItem.quantity < 2"
+          (click)="decreaseQty($event, cartItem.id)"
+        >
+          -
+        </button>
+        <button
+          nz-button
+          nzSize="small"
+          (click)="increaseQty($event, cartItem.id)"
+        >
+          +
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

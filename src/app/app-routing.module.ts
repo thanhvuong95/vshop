@@ -1,8 +1,10 @@
-import { ShopDetailComponent } from './shop/components/shop-detail/shop-detail.component';
-import { ShopComponent } from './shop/shop.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { HomeComponent } from './home/home.component';
+import { ShopComponent } from './shop/shop.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { ShopDetailComponent } from './shop/components/shop-detail/shop-detail.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,10 @@ const routes: Routes = [
         component: ShopDetailComponent,
       },
     ],
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent,
   },
 ];
 

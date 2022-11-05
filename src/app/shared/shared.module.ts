@@ -19,6 +19,7 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzStepsModule } from 'ng-zorro-antd/steps';
 
 import {
   FooterComponent,
@@ -26,6 +27,7 @@ import {
   ProductCardComponent,
   SkeletonComponent,
   ErrorComponent,
+  CartItemComponent,
 } from './components';
 
 const SharedModules = [
@@ -47,7 +49,8 @@ const SharedModules = [
   NzInputModule,
   NzBreadCrumbModule,
   NzDividerModule,
-  NzEmptyModule
+  NzEmptyModule,
+  NzStepsModule,
 ];
 const SharedComponents = [
   HeaderComponent,
@@ -55,10 +58,11 @@ const SharedComponents = [
   ProductCardComponent,
   SkeletonComponent,
   ErrorComponent,
+  CartItemComponent,
 ];
 
 @NgModule({
-  declarations: [...SharedComponents, ErrorComponent],
+  declarations: [...SharedComponents],
   imports: [...SharedModules],
   exports: [...SharedModules, ...SharedComponents],
 })
