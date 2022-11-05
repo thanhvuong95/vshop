@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ICartItem } from './../core/models';
+import { calculateTotalPrice } from '../utils';
 import { CartService } from './../core/services/cart.service';
 
 @Component({
@@ -19,12 +20,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this._cartService.carts.subscribe((carts) => {
-      this.totalPrice = carts.reduce((total, cart) => {
-        const { price, discountPercent, quantity } = cart;
-        const priceDiscount = price - (price * discountPercent) / 100;
-        total += priceDiscount * quantity;
-        return total;
-      }, 0);
+      this.totalPrice = calculateTotalPrice(carts);
       this.carts = carts;
     });
   }

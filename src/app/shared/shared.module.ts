@@ -20,6 +20,9 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 
 import {
   FooterComponent,
@@ -51,7 +54,11 @@ const SharedModules = [
   NzDividerModule,
   NzEmptyModule,
   NzStepsModule,
+  NzModalModule,
+  NzTableModule,
+  NzNotificationModule
 ];
+
 const SharedComponents = [
   HeaderComponent,
   FooterComponent,

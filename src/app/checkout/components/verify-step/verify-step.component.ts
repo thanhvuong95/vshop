@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ICartItem } from 'src/app/core/models';
+
+import { ICartItem } from '../../../core/models';
+import { calculateTotalPrice } from '../../../utils';
 
 @Component({
   selector: 'app-verify-step',
@@ -9,6 +11,9 @@ import { ICartItem } from 'src/app/core/models';
 export class VerifyStepComponent implements OnInit {
   @Input() carts: ICartItem[] = [];
 
+  get totalPrice() {
+    return calculateTotalPrice(this.carts);
+  }
   constructor() {}
 
   ngOnInit(): void {}

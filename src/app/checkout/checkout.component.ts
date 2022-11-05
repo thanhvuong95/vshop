@@ -12,9 +12,10 @@ import { ICartItem } from '../core/models';
 })
 export class CheckoutComponent implements OnInit {
   steps = ['Cart', 'Check out', 'Finish'];
-  step = 1;
+  step = 0;
   carts: ICartItem[] = [];
   subscription = new Subscription();
+
   constructor(private _cartService: CartService) {}
 
   ngOnInit(): void {

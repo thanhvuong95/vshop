@@ -18,6 +18,7 @@
 .app-container {
   @apply max-w-1200 mx-auto;
 }
+
 body::-webkit-scrollbar {
   width: 0.75rem;
 }
@@ -29,7 +30,17 @@ body::-webkit-scrollbar-thumb {
 *::-webkit-scrollbar {
   width: 0.5rem;
 }
+
 *::-webkit-scrollbar-thumb {
   @apply bg-backgroundDarkestGrey rounded-full border border-white;
+}
+
+.text-slice {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  -webkit-line-clamp: 2;
 }
 

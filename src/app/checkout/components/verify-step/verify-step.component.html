@@ -48,20 +48,30 @@
       Order
     </button>
   </div>
-  <div class="p-5 shadow-md min-w-250">
+  <div class="p-5 shadow-md lg:max-w-350">
     <h2 class="text-xl font-medium mb-4">Summary</h2>
-    <!-- <div class="flex gap-2 p-3">
-      <img
-        class="w-20 h-20 object-contain"
-        [src]="cart.imageUrls[0]"
-        alt="image"
-      />
-      <div class="flex-1">
-        <p class="text-truncate">{{ cartItem.name }}</p>
-        <div class="flex justify-between items-center mt-2">
-          <span class="text-primary"> {{ priceDiscount | currency }}</span>
+    <div class="h-200 overflow-y-auto">
+      <div *ngFor="let cart of carts" class="flex gap-2 p-3">
+        <img
+          class="w-20 h-20 object-contain"
+          [src]="cart.imageUrls[0]"
+          alt="image"
+        />
+        <div class="flex-1">
+          <p class="text-slice">{{ cart.name }}</p>
+          <div class="flex justify-between items-center mt-2">
+            <span class="text-primary">
+              {{
+                cart.price - (cart.price * cart.discountPercent) / 100
+                  | currency
+              }}</span
+            >
+            <span class="text-grey">{{ cart.quantity }}</span>
+          </div>
         </div>
-      </div> -->
-    <!-- </div> -->
+      </div>
+    </div>
+    <nz-divider></nz-divider>
+    <p class="text-xl font-medium">Total: {{ totalPrice | currency }}</p>
   </div>
 </div>
