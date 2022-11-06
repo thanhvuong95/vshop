@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { AuthService } from 'src/app/core/services/auth.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,5 +11,7 @@ export class AppComponent {
   title = 'shop';
   openCart = false;
 
-  constructor() {}
+  constructor(private _authService: AuthService) {
+    this._authService.autoLogin();
+  }
 }

@@ -1,0 +1,88 @@
+<div class="flex items-end justify-center">
+  <form class="w-full max-w-350 shadow-md p-8" [formGroup]="signInForm">
+    <h2 class="text-xl text-center font-medium mb-5">Sign In</h2>
+    <div>
+      <label class="inline-block mb-2">Email</label>
+      <input
+        nz-input
+        placeholder="Eg: johndoe@example.com"
+        formControlName="email"
+      />
+      <span
+        nz-typography
+        nzType="danger"
+        *ngIf="
+          signInForm.get('email')?.hasError('required') &&
+          (signInForm.get('email')?.dirty ||
+            signInForm.get('email')?.touched ||
+            isSubmitted)
+        "
+      >
+        Email is required.
+      </span>
+      <span
+        nz-typography
+        nzType="danger"
+        *ngIf="
+          signInForm.get('email')?.hasError('email') &&
+          (signInForm.get('email')?.dirty ||
+            signInForm.get('email')?.touched ||
+            isSubmitted)
+        "
+      >
+        Email format invalid.
+      </span>
+    </div>
+    <div class="my-5">
+      <label class="inline-block mb-2">Password</label>
+      <input
+        type="password"
+        nz-input
+        placeholder="Eg: ********"
+        formControlName="password"
+      />
+      <span
+        nz-typography
+        nzType="danger"
+        *ngIf="
+          signInForm.get('password')?.hasError('required') &&
+          (signInForm.get('password')?.dirty ||
+            signInForm.get('password')?.touched ||
+            isSubmitted)
+        "
+      >
+        Password is required.
+      </span>
+      <span
+        nz-typography
+        nzType="danger"
+        *ngIf="
+          signInForm.get('password')?.hasError('pattern') &&
+          (signInForm.get('password')?.dirty ||
+            signInForm.get('password')?.touched ||
+            isSubmitted)
+        "
+      >
+        Password must be minimum eight characters, at least one letter and one
+        number.
+      </span>
+    </div>
+    <button
+      class="w-full inline-block bg-backgroundPrimary hover:bg-backgroundDarkPrimary"
+      nz-button
+      nzType="primary"
+      (click)="signIn()"
+      [nzLoading]="isLoading"
+    >
+      Sign In
+    </button>
+    <p class="mt-4 text-center">
+      Don't have an account?
+      <span
+        class="underline text-primary hover:text-darkPrimary cursor-pointer"
+        (click)="switchTab.emit(1)"
+        >Sign up here.</span
+      >
+    </p>
+  </form>
+</div>

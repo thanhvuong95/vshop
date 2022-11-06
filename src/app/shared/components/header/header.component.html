@@ -8,8 +8,8 @@
 
     <!-- start nav mobile -->
     <div
-      class="w-full max-w-sm fixed top-0 left-0 bottom-0 z-50 bg-white shadow-md -translate-x-full transition-all ease-linear duration-300"
-      [class]="isOpen ? 'translate-x-0' : ''"
+      class="w-full max-w-sm fixed top-0 left-0 bottom-0 z-50 bg-white shadow-md transition-all ease-linear duration-300"
+      [class]="isOpen ? 'translate-x-0' : '-translate-x-full'"
     >
       <div class="relative flex flex-col py-20">
         <div class="absolute top-10 right-10" (click)="toggleNavigation()">
@@ -55,7 +55,7 @@
     <!-- end nav left -->
 
     <!-- start nav right -->
-    <div class="flex item-center gap-8">
+    <div class="flex items-center gap-8">
       <div class="relative" (click)="showCart.emit()">
         <span
           class="absolute -top-4 -right-4 flex justify-center items-center w-[30px] h-[30px] rounded-full bg-backgroundPrimary text-white border border-white cursor-pointer"
@@ -73,9 +73,11 @@
       <button
         class="hidden lg:inline-block uppercase hover:text-primary"
         nz-button
+        *ngIf="!user"
       >
         Sign in
       </button>
+      <nz-avatar *ngIf="user" nzIcon="user" nzSize="small"></nz-avatar>
     </div>
     <!-- end nav right -->
   </div>

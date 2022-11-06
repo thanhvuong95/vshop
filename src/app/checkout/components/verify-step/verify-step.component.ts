@@ -59,6 +59,7 @@ export class VerifyStepComponent implements OnInit {
       ],
     });
   }
+
   submitForm() {
     if (this.infoForm.valid) {
       const { firstName, lastName, address, zipCode, city, phoneNumber } =
@@ -77,7 +78,6 @@ export class VerifyStepComponent implements OnInit {
       this.isSubmitting = true;
       this._orderService.order(formData).subscribe({
         next: (data) => {
-          console.log(data);
           this.isSubmitting = false;
           this.next.emit();
           this.onOrder.emit(data.orderId);

@@ -60,23 +60,3 @@ export const FILTER_LIST = [
     ],
   },
 ];
-
-// [
-//     {
-//       label: 'Category',
-//       options: [
-//         ICategory.ACCESSORIES,
-//         ICategory.PHONE,
-//         ICategory.HEADPHONE,
-//         ICategory.CONSOLS,
-//       ],
-//     },
-//     {
-//       label: 'Price',
-//       options: ['Low to high', 'High to low'],
-//     },
-//     {
-//       label: 'Product name',
-//       options: ['A-Z', 'Z-A'],
-//     },
-//   ]

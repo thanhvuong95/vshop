@@ -25,6 +25,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzResultModule } from 'ng-zorro-antd/result';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 
 import {
   FooterComponent,
@@ -61,6 +62,7 @@ const SharedModules = [
   NzNotificationModule,
   NzTypographyModule,
   NzResultModule,
+  NzAvatarModule,
 ];
 
 const SharedComponents = [

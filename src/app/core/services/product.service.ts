@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
-import { ICategory } from './../models/category.model';
+
+import { ICategory } from './../models';
 
 import {
   IOption,

@@ -6,3 +6,5 @@ export * from './cart.model';
 export * from './option.model';
 export * from './coupon.model';
 export * from './order.model';
+export * from './user.model';
+export * from './auth-response.model';

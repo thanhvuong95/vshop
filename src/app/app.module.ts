@@ -15,12 +15,17 @@ import { ShopComponent } from './shop/shop.component';
 import { ShopFilterComponent } from './shop/components/shop-filter/shop-filter.component';
 import { ShopContentComponent } from './shop/components/shop-content/shop-content.component';
 import { ShopDetailComponent } from './shop/components/shop-detail/shop-detail.component';
+
 import { CartComponent } from './cart/cart.component';
 
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CartStepComponent } from './checkout/components/cart-step/cart-step.component';
 import { FinishStepComponent } from './checkout/components/finish-step/finish-step.component';
 import { VerifyStepComponent } from './checkout/components/verify-step/verify-step.component';
+
+import { AuthComponent } from './auth/auth.component';
+import { SignInComponent } from './auth/components/sign-in/sign-in.component';
+import { SignUpComponent } from './auth/components/sign-up/sign-up.component';
 
 const Components = [
   AppComponent,
@@ -36,6 +41,9 @@ const Components = [
   CartStepComponent,
   VerifyStepComponent,
   FinishStepComponent,
+  AuthComponent,
+  SignInComponent,
+  SignUpComponent,
 ];
 
 @NgModule({

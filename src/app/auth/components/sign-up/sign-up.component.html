@@ -1,0 +1,121 @@
+<div class="flex items-end justify-center">
+  <form class="w-full max-w-350 shadow-md p-8" [formGroup]="signUpForm">
+    <h2 class="text-xl text-center font-medium mb-5">Sign Up</h2>
+    <div>
+      <label class="inline-block mb-2">Email</label>
+      <input
+        nz-input
+        placeholder="Eg: johndoe@example.com"
+        formControlName="email"
+      />
+      <span
+        nz-typography
+        nzType="danger"
+        *ngIf="
+          signUpForm.get('email')?.hasError('required') &&
+          (signUpForm.get('email')?.dirty ||
+            signUpForm.get('email')?.touched ||
+            isSubmitted)
+        "
+      >
+        Email is required.
+      </span>
+      <span
+        nz-typography
+        nzType="danger"
+        *ngIf="
+          signUpForm.get('email')?.hasError('email') &&
+          (signUpForm.get('email')?.dirty ||
+            signUpForm.get('email')?.touched ||
+            isSubmitted)
+        "
+      >
+        Email format invalid.
+      </span>
+    </div>
+    <div class="my-5">
+      <label class="inline-block mb-2">Password</label>
+      <input
+        type="password"
+        nz-input
+        placeholder="Eg: ********"
+        formControlName="password"
+      />
+      <span
+        nz-typography
+        nzType="danger"
+        *ngIf="
+          signUpForm.get('password')?.hasError('required') &&
+          (signUpForm.get('password')?.dirty ||
+            signUpForm.get('password')?.touched ||
+            isSubmitted)
+        "
+      >
+        Password is required.
+      </span>
+      <span
+        nz-typography
+        nzType="danger"
+        *ngIf="
+          signUpForm.get('password')?.hasError('pattern') &&
+          (signUpForm.get('password')?.dirty ||
+            signUpForm.get('password')?.touched ||
+            isSubmitted)
+        "
+      >
+        Password must be minimum eight characters, at least one letter and one
+        number.
+      </span>
+    </div>
+    <div class="mb-5">
+      <label class="inline-block mb-2">Confirm Password</label>
+      <input
+        type="password"
+        nz-input
+        placeholder="Eg: ********"
+        formControlName="confirmPassword"
+      />
+      <span
+        nz-typography
+        nzType="danger"
+        *ngIf="
+          signUpForm.get('confirmPassword')?.hasError('required') &&
+          (signUpForm.get('confirmPassword')?.dirty ||
+            signUpForm.get('confirmPassword')?.touched ||
+            isSubmitted)
+        "
+      >
+        Confirm password is required.
+      </span>
+      <span
+        nz-typography
+        nzType="danger"
+        *ngIf="
+          signUpForm.get('confirmPassword')?.hasError('notMatch') &&
+          (signUpForm.get('confirmPassword')?.dirty ||
+            signUpForm.get('confirmPassword')?.touched ||
+            isSubmitted)
+        "
+      >
+        Confirm password not match.
+      </span>
+    </div>
+    <button
+      class="w-full inline-block bg-backgroundPrimary hover:bg-backgroundDarkPrimary"
+      nz-button
+      nzType="primary"
+      (click)="signUp()"
+      [nzLoading]="isLoading"
+    >
+      Sign up
+    </button>
+    <p class="mt-4 text-center">
+      Already have an account?
+      <span
+        class="underline text-primary hover:text-darkPrimary cursor-pointer"
+        (click)="switchTab.emit(0)"
+        >Sign in here.</span
+      >
+    </p>
+  </form>
+</div>

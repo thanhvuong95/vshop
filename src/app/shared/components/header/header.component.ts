@@ -1,8 +1,9 @@
-import { CartService } from './../../../core/services/cart.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { Navigation } from 'src/app/core/models';
-import { map, of } from 'rxjs';
+import { Subscription } from 'rxjs';
+
+import { Navigation, User } from 'src/app/core/models';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { CartService } from './../../../core/services/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -16,8 +17,13 @@ export class HeaderComponent implements OnInit {
   isOpen = false;
   quantity = 0;
   activeAnimated = false;
+  subscription: Subscription[] = [];
+  user: User | null = null;
 
-  constructor(private _router: Router, private _cartService: CartService) {
+  constructor(
+    private _cartService: CartService,
+    private _authService: AuthService
+  ) {
     this.navList = [
       new Navigation('', 'Home'),
       new Navigation('shop', 'Shop'),
@@ -27,12 +33,17 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._cartService.carts.subscribe((carts) => {
+    const subCart = this._cartService.carts.subscribe((carts) => {
       const quantity = carts.reduce((total, cart) => total + cart.quantity, 0);
       this.quantity = quantity;
       this.activeAnimated = true;
       setTimeout(() => (this.activeAnimated = false), 1000);
     });
+    const subAuth = this._authService.user.subscribe(
+      (user) => (this.user = user)
+    );
+
+    this.subscription = [...this.subscription, subCart, subAuth];
   }
 
   ngDoCheck(): void {
@@ -41,6 +52,10 @@ export class HeaderComponent implements OnInit {
     } else {
       document.body.style.overflow = 'auto';
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.forEach((sub) => sub.unsubscribe());
   }
 
   toggleNavigation() {

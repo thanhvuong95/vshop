@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { finalize, Subscription, switchMap, tap } from 'rxjs';
+import { Subscription, switchMap, tap } from 'rxjs';
 
 import { IProduct } from '../../../core/models';
 import { ProductService } from '../../../core/services/product.service';

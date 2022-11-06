@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { CartService } from '../core/services/cart.service';
 import { ICartItem, ICoupon } from '../core/models';
+import { CartService } from '../core/services/cart.service';
 
 @Component({
   selector: 'app-checkout',

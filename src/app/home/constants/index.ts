@@ -1,4 +1,4 @@
-import { ISliderData } from './../../core/models/slider.model';
+import { ISliderData } from './../../core/models';
 
 export const SliderData: ISliderData[] = [
   {

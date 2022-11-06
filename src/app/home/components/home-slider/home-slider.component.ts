@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import SwiperCore, { Autoplay, Navigation } from 'swiper';
 
 import { ISliderData } from 'src/app/core/models';

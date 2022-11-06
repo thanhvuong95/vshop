@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { ShopComponent } from './shop/shop.component';
+import { AuthComponent } from './auth/auth.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ShopDetailComponent } from './shop/components/shop-detail/shop-detail.component';
 
@@ -27,6 +28,15 @@ const routes: Routes = [
   {
     path: 'checkout',
     component: CheckoutComponent,
+  },
+  {
+    path: 'auth',
+    component: AuthComponent,
+  },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full',
   },
 ];
 
