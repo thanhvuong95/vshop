@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../core/services/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -7,8 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthComponent implements OnInit {
   tab = 0; //0: signIn 1: signUp
+  subscription = new Subscription();
+  constructor(private _authService: AuthService, private _router: Router) {}
 
-  constructor() {}
+  ngOnInit(): void {
+    this.subscription = this._authService.user.subscribe((user) => {
+      if (user) {
+        this._router.navigate(['']);
+      }
+    });
+  }
 
-  ngOnInit(): void {}
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }

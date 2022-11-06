@@ -74,6 +74,7 @@
         class="hidden lg:inline-block uppercase hover:text-primary"
         nz-button
         *ngIf="!user"
+        [routerLink]="['/auth']"
       >
         Sign in
       </button>

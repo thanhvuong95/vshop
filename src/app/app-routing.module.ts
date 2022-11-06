@@ -6,6 +6,7 @@ import { ShopComponent } from './shop/shop.component';
 import { AuthComponent } from './auth/auth.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ShopDetailComponent } from './shop/components/shop-detail/shop-detail.component';
+import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
   {
     path: 'checkout',
     component: CheckoutComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'auth',
