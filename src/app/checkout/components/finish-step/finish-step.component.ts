@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-finish-step',
   templateUrl: './finish-step.component.html',
-  styleUrls: ['./finish-step.component.scss']
+  styleUrls: ['./finish-step.component.scss'],
 })
 export class FinishStepComponent implements OnInit {
+  @Input() orderId = '';
 
-  constructor() { }
-
-  ngOnInit(): void {
+  get orderTitle() {
+    return `Your Order Id: ${this.orderId}. \n You can see your order in profile section.`;
   }
 
+  constructor() {}
+
+  ngOnInit(): void {}
 }

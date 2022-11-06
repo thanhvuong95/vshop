@@ -1,19 +1,45 @@
-<div class="flex gap-5 flex-col lg:flex-row">
-  <div class="flex flex-col gap-5 flex-1 p-5 shadow-md">
+<div class="flex gap-5 flex-col-reverse lg:flex-row">
+  <form [formGroup]="infoForm" class="flex flex-col gap-5 flex-1 p-5 shadow-md">
     <h2 class="text-xl font-medium">Contact Information</h2>
     <div class="flex gap-3 md:w-2/3 lg:w-1/2">
-      <input
-        class="rounded-md"
-        nz-input
-        nzSize="large"
-        placeholder="First Name"
-      />
-      <input
-        class="rounded-md"
-        nz-input
-        nzSize="large"
-        placeholder="Last Name"
-      />
+      <div class="w-full">
+        <input
+          class="rounded-md"
+          nz-input
+          nzSize="large"
+          placeholder="First Name"
+          formControlName="firstName"
+        />
+        <span
+          nz-typography
+          nzType="danger"
+          *ngIf="
+            infoForm.get('firstName')?.hasError('required') &&
+            (infoForm.get('firstName')?.dirty ||
+              infoForm.get('firstName')?.touched)
+          "
+          >First name is required.</span
+        >
+      </div>
+      <div class="w-full">
+        <input
+          class="rounded-md"
+          nz-input
+          nzSize="large"
+          placeholder="Last Name"
+          formControlName="lastName"
+        />
+        <span
+          nz-typography
+          nzType="danger"
+          *ngIf="
+            infoForm.get('lastName')?.hasError('required') &&
+            (infoForm.get('lastName')?.dirty ||
+              infoForm.get('lastName')?.touched)
+          "
+          >Last name is required.</span
+        >
+      </div>
     </div>
     <div>
       <input
@@ -21,33 +47,108 @@
         nz-input
         nzSize="large"
         placeholder="Street Address"
+        formControlName="address"
       />
+      <span
+        nz-typography
+        nzType="danger"
+        *ngIf="
+          infoForm.get('address')?.hasError('required') &&
+          (infoForm.get('address')?.dirty || infoForm.get('address')?.touched)
+        "
+        >Address is required.</span
+      >
     </div>
     <div class="flex gap-3 md:w-2/3 lg:w-1/2">
-      <input class="rounded-md" nz-input nzSize="large" placeholder="City" />
-      <input
-        class="rounded-md"
-        nz-input
-        nzSize="large"
-        placeholder="Zip code"
-      />
+      <div class="w-full">
+        <input
+          formControlName="city"
+          class="rounded-md"
+          nz-input
+          nzSize="large"
+          placeholder="City"
+        />
+        <span
+          nz-typography
+          nzType="danger"
+          *ngIf="
+            infoForm.get('city')?.hasError('required') &&
+            (infoForm.get('city')?.dirty || infoForm.get('city')?.touched)
+          "
+          >City is required.</span
+        >
+      </div>
+      <div class="w-full">
+        <input
+          numberOnly
+          class="rounded-md"
+          nz-input
+          nzSize="large"
+          placeholder="Zip code"
+          formControlName="zipCode"
+        />
+        <span
+          nz-typography
+          nzType="danger"
+          *ngIf="
+            infoForm.get('zipCode')?.hasError('required') &&
+            (infoForm.get('zipCode')?.dirty || infoForm.get('zipCode')?.touched)
+          "
+          >Zip code is required.</span
+        >
+        <span
+          nz-typography
+          nzType="danger"
+          *ngIf="
+            infoForm.get('zipCode')?.hasError('pattern') &&
+            (infoForm.get('zipCode')?.dirty || infoForm.get('zipCode')?.touched)
+          "
+          >Zip code must be digit.</span
+        >
+      </div>
     </div>
     <div class="md:w-2/3 lg:w-1/2">
       <input
+        numberOnly
         class="rounded-md"
         nz-input
         nzSize="large"
         placeholder="Phone Number"
+        formControlName="phoneNumber"
       />
+      <span
+        nz-typography
+        nzType="danger"
+        *ngIf="
+          infoForm.get('phoneNumber')?.hasError('required') &&
+          (infoForm.get('phoneNumber')?.dirty ||
+            infoForm.get('phoneNumber')?.touched)
+        "
+        >Phone number is required.</span
+      >
+      <span
+        nz-typography
+        nzType="danger"
+        *ngIf="
+          infoForm.get('phoneNumber')?.hasError('pattern') &&
+          (infoForm.get('phoneNumber')?.dirty ||
+            infoForm.get('phoneNumber')?.touched)
+        "
+        >Phone number should be 10 digit.</span
+      >
     </div>
     <button
-      class="bg-backgroundPrimary text-white hover:bg-backgroundDarkPrimary hover:text-white"
+      class="bg-backgroundPrimary hover:bg-backgroundDarkPrimary"
       nz-button
+      nzType="primary"
+      [nzLoading]="isSubmitting"
       nzSize="large"
+      [disabled]="infoForm.invalid"
+      (click)="submitForm()"
     >
       Order
     </button>
-  </div>
+  </form>
   <div class="p-5 shadow-md lg:max-w-350">
     <h2 class="text-xl font-medium mb-4">Summary</h2>
     <div class="h-200 overflow-y-auto">

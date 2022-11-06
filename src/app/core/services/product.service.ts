@@ -32,7 +32,6 @@ export class ProductService {
 
         //fake search
         const searchData = this.searchByName(products, q);
-        // const searchData =
         //fake sort & filter
         const result = this.queryProducts(searchData, sort);
         // fake call api pagination

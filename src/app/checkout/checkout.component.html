@@ -1,14 +1,27 @@
 <div>
   <div class="app-container p-5">
-    <nz-steps [nzCurrent]="step" (nzIndexChange)="step = $event">
+    <nz-steps [nzCurrent]="step" (nzIndexChange)="changeStep($event)">
       <nz-step *ngFor="let title of steps" [nzTitle]="title"> </nz-step>
     </nz-steps>
     <div [ngSwitch]="step">
       <div *ngSwitchCase="0" class="py-5">
-        <app-cart-step [carts]="carts" (next)="step = $event"></app-cart-step>
+        <app-cart-step
+          [carts]="carts"
+          [selectedCoupon]="selectedCoupon"
+          (changeCoupon)="selectedCoupon = $event"
+          (next)="step = step + 1"
+        ></app-cart-step>
       </div>
       <div *ngSwitchCase="1" class="py-5">
-        <app-verify-step [carts]="carts"></app-verify-step>
+        <app-verify-step
+          [carts]="carts"
+          [selectedCoupon]="selectedCoupon"
+          (next)="step = step + 1"
+          (onOrder)="orderId = $event"
+        ></app-verify-step>
+      </div>
+      <div *ngSwitchCase="2" class="py-5">
+        <app-finish-step [orderId]="orderId"></app-finish-step>
       </div>
     </div>
   </div>

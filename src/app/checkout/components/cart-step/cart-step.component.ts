@@ -22,26 +22,31 @@ import { calculateTotalPrice, couponColumns, coupons } from './../../../utils';
 })
 export class CartStepComponent implements OnInit {
   @Input() carts: ICartItem[] = [];
-  @Output() next = new EventEmitter<number>();
+  @Input() selectedCoupon: ICoupon | null = null;
+  @Output() next = new EventEmitter();
+  @Output() changeCoupon = new EventEmitter<ICoupon | null>();
+
   couponInputCode!: FormControl;
   isOpenModal = false;
   couponData: ICoupon[] = [];
   couponColumns: ICouponColumn[] = [];
   disabled = true;
   subscription = new Subscription();
-  selectedCoupon: ICoupon | null = null;
-  initTotalPrice = 0;
+  decreasedPrice = 0;
 
   get totalPrice() {
+    const { discount } = this.selectedCoupon || {};
     const price = calculateTotalPrice(this.carts);
-    this.initTotalPrice = price;
-    if (this.selectedCoupon) {
-      return price - (price * this.selectedCoupon.discount) / 100;
+
+    if (discount) {
+      const priceDiscount = price - (price * discount) / 100;
+      this.decreasedPrice = price - priceDiscount;
+      return priceDiscount;
     }
     return price;
   }
 
-  constructor(private notification: NzNotificationService) {}
+  constructor(private _notification: NzNotificationService) {}
 
   ngOnInit(): void {
     this.couponData = coupons;
@@ -50,6 +55,17 @@ export class CartStepComponent implements OnInit {
     this.subscription = this.couponInputCode.valueChanges.subscribe((value) => {
       this.disabled = !value;
     });
+  }
+
+  ngAfterViewInit(): void {
+    if (this.selectedCoupon) {
+      this.couponInputCode.setValue(this.selectedCoupon.couponCode);
+      this.couponInputCode.disable();
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   initForm() {
@@ -62,13 +78,13 @@ export class CartStepComponent implements OnInit {
       const [coupon] = coupons.filter(
         (coupon) => coupon.couponCode === this.couponInputCode.value
       );
-      this.selectedCoupon = coupon;
+      this.changeCoupon.emit(coupon);
       this.couponInputCode.disable();
     } else {
-      this.selectedCoupon = null;
+      this.changeCoupon.emit(null);
       this.couponInputCode.enable();
       if (errors) {
-        this.notification.error('Error', errors['match'], {
+        this._notification.error('Error', errors['match'], {
           nzPlacement: 'topRight',
           nzDuration: 2000,
         });
@@ -85,9 +101,5 @@ export class CartStepComponent implements OnInit {
   selectCoupon(data: ICoupon) {
     this.toggleModal();
     this.couponInputCode.setValue(data.couponCode);
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 }

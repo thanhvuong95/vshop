@@ -1,1 +1,15 @@
-<p>finish-step works!</p>
+<nz-result
+  nzStatus="success"
+  nzTitle="Successfully Purchased"
+  [nzSubTitle]="orderTitle"
+>
+  <div nz-result-extra>
+    <button
+      class="bg-backgroundPrimary hover:bg-backgroundDarkPrimary"
+      nz-button
+      nzType="primary"
+    >
+      Go To My Order
+    </button>
+  </div>
+</nz-result>

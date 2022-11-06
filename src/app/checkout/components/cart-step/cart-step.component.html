@@ -35,7 +35,7 @@
       {{
         selectedCoupon.discount +
           "% discount and you save " +
-          (initTotalPrice - totalPrice | currency)
+          (decreasedPrice | currency)
       }}
     </p>
     <p class="text-xl font-medium my-3">Total: {{ totalPrice | currency }}</p>
@@ -43,7 +43,7 @@
       class="block w-full uppercase bg-backgroundPrimary hover:bg-backgroundDarkPrimary"
       nz-button
       nzType="primary"
-      (click)="next.emit(1)"
+      (click)="next.emit()"
     >
       Continue to checkout
     </button>

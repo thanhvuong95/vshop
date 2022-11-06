@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { CartService } from '../core/services/cart.service';
-import { ICartItem } from '../core/models';
+import { ICartItem, ICoupon } from '../core/models';
 
 @Component({
   selector: 'app-checkout',
@@ -14,7 +14,9 @@ export class CheckoutComponent implements OnInit {
   steps = ['Cart', 'Check out', 'Finish'];
   step = 0;
   carts: ICartItem[] = [];
+  selectedCoupon: ICoupon | null = null;
   subscription = new Subscription();
+  orderId = '';
 
   constructor(private _cartService: CartService) {}
 
@@ -26,5 +28,11 @@ export class CheckoutComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  changeStep(value: number) {
+    if (this.step !== this.steps.length - 1) {
+      this.step = value;
+    }
   }
 }
