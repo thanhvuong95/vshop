@@ -1,9 +1,9 @@
-<div class="min-h-screen">
+<div>
   <app-header
     [openCart]="openCart"
     (showCart)="openCart = !openCart"
   ></app-header>
-  <div class="min-h-screen mt-20 flex flex-col justify-center">
+  <div class="mt-20">
     <router-outlet></router-outlet>
   </div>
   <app-cart [openCart]="openCart" (closeCart)="openCart = !openCart"></app-cart>

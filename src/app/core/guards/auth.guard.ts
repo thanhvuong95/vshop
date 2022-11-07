@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
-  Router,
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
@@ -17,8 +16,7 @@ import { AuthService } from '../services/auth.service';
 export class AuthGuard implements CanActivate {
   constructor(
     private _authService: AuthService,
-    private _notification: NzNotificationService,
-    private _router: Router
+    private _notification: NzNotificationService
   ) {}
 
   canActivate(
@@ -39,7 +37,6 @@ export class AuthGuard implements CanActivate {
           nzPlacement: 'topRight',
           nzDuration: 2000,
         });
-        this._router.navigate(['']);
         return false;
       })
     );

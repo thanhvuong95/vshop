@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'shop';
+  title = 'VShop';
   openCart = false;
 
   constructor(private _authService: AuthService) {

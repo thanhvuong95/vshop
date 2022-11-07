@@ -29,9 +29,14 @@
           [routerLinkActiveOptions]="{ exact: true }"
           >{{ navItem.title }}</a
         >
-        <div class="text-center py-5">
-          <button class="uppercase hover:text-primary" nz-button nzSize="large">
-            Sign in
+        <div class="text-center p-5">
+          <button
+            class="inline-block w-full uppercase bg-backgroundPrimary hover:bg-backgroundDarkPrimary"
+            nz-button
+            nzType="primary"
+            (click)="handleAuth()"
+          >
+            {{ user ? "Sign out" : "Sign in" }}
           </button>
         </div>
       </div>
@@ -78,7 +83,42 @@
       >
         Sign in
       </button>
-      <nz-avatar *ngIf="user" nzIcon="user" nzSize="small"></nz-avatar>
+      <a
+        class="hidden lg:inline-block"
+        *ngIf="user"
+        nz-dropdown
+        [nzDropdownMenu]="menu"
+        nzTrigger="click"
+        nzPlacement="bottomRight"
+      >
+        <nz-avatar nzIcon="user" nzSize="small"></nz-avatar>
+      </a>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu nzSelectable>
+          <li
+            nz-menu-item
+            class="flex items-center gap-3 text-lightGrey pointer-events-none"
+          >
+            <i nz-icon nzType="profile" nzTheme="outline"></i>
+            <span>My Profile</span>
+          </li>
+          <li
+            nz-menu-item
+            class="flex items-center gap-3 text-lightGrey pointer-events-none"
+          >
+            <i nz-icon nzType="setting" nzTheme="outline"></i>
+            <span>Settings</span>
+          </li>
+          <li
+            nz-menu-item
+            class="flex items-center gap-3"
+            (click)="handleAuth()"
+          >
+            <i nz-icon nzType="logout" nzTheme="outline"></i>
+            <span>Logout</span>
+          </li>
+        </ul>
+      </nz-dropdown-menu>
     </div>
     <!-- end nav right -->
   </div>

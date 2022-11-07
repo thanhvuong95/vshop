@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { Navigation, User } from 'src/app/core/models';
@@ -22,7 +23,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private _cartService: CartService,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _router: Router
   ) {
     this.navList = [
       new Navigation('', 'Home'),
@@ -60,5 +62,15 @@ export class HeaderComponent implements OnInit {
 
   toggleNavigation() {
     this.isOpen = !this.isOpen;
+  }
+
+  handleAuth() {
+    if (this.user) {
+      this.isOpen = false;
+      this._authService.logout();
+    } else {
+      this.toggleNavigation();
+      this._router.navigate(['/auth']);
+    }
   }
 }
